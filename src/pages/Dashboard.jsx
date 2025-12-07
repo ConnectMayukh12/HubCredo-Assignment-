@@ -25,15 +25,23 @@ export default function Dashboard() {
   }, [navigate, isLoggingOut]);
 
   useEffect(() => {
-    // Fetch random quote using CORS proxy
-    fetch(import.meta.env.VITE_QUOTE_API_URL)
+    // Fetch random quote - using quotable.io (CORS-friendly)
+    fetch("https://api.quotable.io/random")
       .then((response) => response.json())
       .then((data) => {
-        if (data && data.length > 0) {
-          setQuote(data[0]);
+        if (data) {
+          // Format to match zenquotes structure
+          setQuote({ q: data.content, a: data.author });
         }
       })
-      .catch((err) => console.error("Failed to fetch quote:", err));
+      .catch((err) => {
+        console.error("Failed to fetch quote:", err);
+        // Fallback quote
+        setQuote({ 
+          q: "The only way to do great work is to love what you do.", 
+          a: "Steve Jobs" 
+        });
+      });
   }, []);
 
   const handleLogoutClick = () => {
