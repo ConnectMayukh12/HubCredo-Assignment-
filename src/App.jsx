@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
-import Signup from "./pages/SignUp";
+import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import ForgotPassword from "./pages/ForgotPassword";
 
